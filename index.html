@@ -1,500 +1,811 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aura Command - Prototype</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/phosphor-icons"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a1b1e;
-            color: #d1d5db;
-            overflow: hidden;
-        }
-        .main-grid {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            grid-template-rows: 1fr auto;
-            height: 100vh;
-        }
-        .nav-panel { grid-column: 1; grid-row: 1 / 3; }
-        .content-panel { grid-column: 2; grid-row: 1; overflow-y: auto;}
-        .action-panel { grid-column: 2; grid-row: 2; }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #2a2c30; }
-        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #1a1b1e;
+        color: #d1d5db;
+        overflow: hidden;
+      }
+      .main-grid {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        grid-template-rows: 1fr auto;
+        height: 100vh;
+      }
+      .nav-panel {
+        grid-column: 1;
+        grid-row: 1 / 3;
+      }
+      .content-panel {
+        grid-column: 2;
+        grid-row: 1;
+        overflow-y: auto;
+      }
+      .action-panel {
+        grid-column: 2;
+        grid-row: 2;
+      }
 
-        .action-key {
-            background-color: #374151;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-bottom: 2px solid #1f2937;
-            cursor: pointer;
-            transition: all 0.1s ease-in-out;
-        }
-        .action-key:hover {
-             transform: translateY(-2px);
-             background-color: #4b5563;
-        }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #2a2c30;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+      }
+
+      .action-key {
+        background-color: #374151;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-bottom: 2px solid #1f2937;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out;
+      }
+      .action-key:hover {
+        transform: translateY(-2px);
+        background-color: #4b5563;
+      }
     </style>
-</head>
-<body class="text-sm">
-
+  </head>
+  <body class="text-sm">
     <div class="main-grid">
-        <!-- Panel Navigasi Kiri -->
-        <aside class="nav-panel bg-[#242629] p-4 flex flex-col justify-between border-r border-gray-700">
-            <div>
-                <div class="flex items-center gap-3 mb-8">
-                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <h1 class="text-xl font-bold text-white">Aura Command</h1>
-                </div>
+      <!-- Panel Navigasi Kiri -->
+      <aside
+        class="nav-panel bg-[#242629] p-4 flex flex-col justify-between border-r border-gray-700"
+      >
+        <div>
+          <div class="flex items-center gap-3 mb-8">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                stroke="#818cf8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <h1 class="text-xl font-bold text-white">Aura Command</h1>
+          </div>
 
-                <nav class="flex flex-col gap-2">
-                    <a href="#" class="nav-item flex items-center gap-3 p-3 rounded-lg bg-gray-700 text-white" data-view="assignment">
-                        <i class="ph-bold ph-game-controller text-xl"></i>
-                        <span>Command Assignment</span>
-                    </a>
-                    <a href="#" class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700" data-view="devices">
-                        <i class="ph-bold ph-plugs-connected text-xl"></i>
-                        <span>Input Devices</span>
-                    </a>
-                    <a href="#" class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700" data-view="calibration">
-                        <i class="ph-bold ph-crosshair text-xl"></i>
-                        <span>Calibration</span>
-                    </a>
-                </nav>
+          <nav class="flex flex-col gap-2">
+            <a
+              href="#"
+              class="nav-item flex items-center gap-3 p-3 rounded-lg bg-gray-700 text-white"
+              data-view="assignment"
+            >
+              <i class="ph-bold ph-game-controller text-xl"></i>
+              <span>Command Assignment</span>
+            </a>
+            <a
+              href="#"
+              class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700"
+              data-view="devices"
+            >
+              <i class="ph-bold ph-plugs-connected text-xl"></i>
+              <span>Input Devices</span>
+            </a>
+            <a
+              href="#"
+              class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700"
+              data-view="calibration"
+            >
+              <i class="ph-bold ph-crosshair text-xl"></i>
+              <span>Calibration</span>
+            </a>
+          </nav>
 
-                <hr class="border-gray-700 my-6">
-                
-                <div id="profiles-container">
-                    <!-- Profiles will be loaded here by JS -->
-                </div>
-            </div>
-            
-            <div class="mt-auto">
-                 <a href="#" class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700" data-view="settings">
-                    <i class="ph-bold ph-gear-six text-xl"></i>
-                    <span>Settings</span>
-                </a>
-            </div>
-        </aside>
+          <hr class="border-gray-700 my-6" />
 
-        <!-- Panel Konten Utama -->
-        <main id="main-content" class="content-panel p-8">
-            <!-- Assignment View -->
-            <div id="assignment-view" class="view">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <h2 class="text-3xl font-bold text-white">Command Assignment</h2>
-                        <p class="text-gray-400">Atur perintah suara dan mata untuk profil <span id="active-profile-name" class="font-semibold text-indigo-400"></span>.</p>
-                    </div>
-                    <button onclick="openAddCommandModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-lg flex items-center gap-2 transition-colors">
-                        <i class="ph-bold ph-plus-circle"></i>
-                        Add New Command
-                    </button>
-                </div>
-                <div id="command-list" class="space-y-2">
-                    <!-- Commands will be loaded here by JS -->
-                </div>
-            </div>
-
-            <!-- Devices View -->
-            <div id="devices-view" class="view hidden">
-                <h2 class="text-3xl font-bold text-white mb-6">Input Devices</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Microphone Card -->
-                    <div class="bg-[#242629] border border-gray-700 rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="ph-bold ph-microphone text-3xl text-sky-400"></i>
-                                <h3 class="text-xl font-bold text-white">Microphone</h3>
-                            </div>
-                            <span class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Connected</span>
-                        </div>
-                        <p class="text-gray-400 mb-1">Device:</p>
-                        <p class="text-white font-medium mb-4">Realtek High Definition Audio (Default)</p>
-                        <p class="text-gray-400 mb-2">Input Level:</p>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-sky-500 h-2.5 rounded-full" style="width: 65%"></div>
-                        </div>
-                        <button class="mt-6 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" onclick="alert('Fungsi belum diimplementasikan.')">
-                            Device Settings
-                        </button>
-                    </div>
-                    <!-- Eye Tracker Card -->
-                    <div class="bg-[#242629] border border-gray-700 rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <i class="ph-bold ph-eye text-3xl text-violet-400"></i>
-                                <h3 class="text-xl font-bold text-white">Eye Tracker</h3>
-                            </div>
-                             <span class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Calibrated</span>
-                        </div>
-                        <p class="text-gray-400 mb-1">Device:</p>
-                        <p class="text-white font-medium mb-4">Tobii Eye Tracker 5</p>
-                        <p class="text-gray-400 mb-2">Last Calibration:</p>
-                        <p class="text-white font-medium">Today, 10:15 AM</p>
-                        <button class="mt-6 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" onclick="alert('Fungsi belum diimplementasikan.')">
-                            Device Settings
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Calibration View -->
-            <div id="calibration-view" class="view hidden">
-                <h2 class="text-3xl font-bold text-white mb-6">Calibration Wizard</h2>
-                <p class="text-gray-400 mb-8 max-w-2xl">Kalibrasi yang akurat adalah kunci untuk pengalaman bermain terbaik. Ikuti langkah-langkah di bawah ini untuk mengoptimalkan perangkat Anda.</p>
-                <div class="space-y-8">
-                    <!-- Microphone Calibration -->
-                    <div class="bg-[#242629] border border-gray-700 rounded-lg p-6 flex items-center gap-6">
-                        <i class="ph-bold ph-microphone-stage text-5xl text-sky-400"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-white">Microphone Calibration</h3>
-                            <p class="text-gray-400 mt-1 mb-4">Pastikan suara Anda dikenali dengan jelas dan akurat oleh sistem.</p>
-                            <button class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-lg transition-colors" onclick="alert('Memulai proses kalibrasi mikrofon...')">
-                                Start Mic Calibration
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Eye Tracker Calibration -->
-                    <div class="bg-[#242629] border border-gray-700 rounded-lg p-6 flex items-center gap-6">
-                        <i class="ph-bold ph-dots-nine text-5xl text-violet-400"></i>
-                        <div>
-                            <h3 class="text-xl font-bold text-white">Eye Tracker Calibration</h3>
-                            <p class="text-gray-400 mt-1 mb-4">Ikuti titik-titik di layar untuk memastikan pelacakan mata yang presisi.</p>
-                            <button class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-5 rounded-lg transition-colors" onclick="alert('Memulai proses kalibrasi eye tracker...')">
-                                Start Eye Tracker Calibration
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings View -->
-            <div id="settings-view" class="view hidden">
-                 <h2 class="text-3xl font-bold text-white mb-8">Settings</h2>
-                <div class="max-w-3xl space-y-10">
-                    <div>
-                        <h3 class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4">General</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <label for="language-select" class="text-gray-300">Language</label>
-                                <select id="language-select" class="bg-gray-700 border border-gray-600 rounded-md px-3 py-1.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                    <option>Bahasa Indonesia</option>
-                                    <option>English</option>
-                                </select>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <label for="theme-toggle" class="text-gray-300">Start with Windows</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                  <input type="checkbox" value="" class="sr-only peer" checked>
-                                  <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4">In-Game Overlay</h3>
-                        <div class="space-y-4">
-                             <div class="flex justify-between items-center">
-                                <label for="overlay-toggle" class="text-gray-300">Enable In-Game Overlay</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                  <input type="checkbox" value="" class="sr-only peer" checked>
-                                  <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
-                                </label>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <label for="feedback-toggle" class="text-gray-300">Show Command Feedback</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                  <input type="checkbox" value="" class="sr-only peer" checked>
-                                  <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4">About</h3>
-                         <div class="text-gray-400">
-                            <p>Aura Command v1.0.0 (Prototype)</p>
-                            <p>Created to empower gamers everywhere.</p>
-                            <button class="mt-4 text-indigo-400 hover:text-indigo-300 font-semibold" onclick="alert('Anda sudah menggunakan versi terbaru.')">Check for Updates</button>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Panel Aksi Bawah -->
-        <footer id="action-panel" class="action-panel bg-[#242629] p-4 border-t border-gray-700">
-             <div class="flex items-center gap-4 mb-3">
-                 <h3 class="text-sm font-semibold text-white">Action Library</h3>
-                 <div class="flex gap-1">
-                    <!-- Action tabs will be added here -->
-                 </div>
-             </div>
-             <div id="action-keys-container" class="flex flex-wrap gap-2 text-white">
-                 <!-- Action keys will be loaded here -->
-             </div>
-        </footer>
-    </div>
-    
-    <!-- Modal for Adding Command -->
-    <div id="add-command-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-        <div class="bg-[#2a2c30] rounded-lg shadow-xl w-full max-w-lg p-6 border border-gray-700">
-            <h3 class="text-xl font-bold text-white mb-4">Add New Command</h3>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Trigger Input</label>
-                    <select id="modal-trigger-type" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="voice">Voice Command</option>
-                        <option value="eye">Eye Tracking</option>
-                    </select>
-                </div>
-                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Trigger Value (e.g., "Reload" or "Blink Right")</label>
-                    <input type="text" id="modal-trigger-value" placeholder="Ucapkan 'Reload' atau 'Kedip Kanan'" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Action (Pilih dari library di bawah)</label>
-                    <input type="text" id="modal-action-value" readonly placeholder="Klik aksi dari Action Library" class="w-full bg-gray-900 border border-gray-600 rounded-md px-3 py-2 text-white cursor-not-allowed">
-                </div>
-            </div>
-            <div class="mt-6 flex justify-end gap-3">
-                <button onclick="closeAddCommandModal()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">Batal</button>
-                <button onclick="saveCommand()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Simpan</button>
-            </div>
+          <div id="profiles-container">
+            <!-- Profiles will be loaded here by JS -->
+          </div>
         </div>
+
+        <div class="mt-auto">
+          <a
+            href="#"
+            class="nav-item flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700"
+            data-view="settings"
+          >
+            <i class="ph-bold ph-gear-six text-xl"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Panel Konten Utama -->
+      <main id="main-content" class="content-panel p-8">
+        <!-- Assignment View -->
+        <div id="assignment-view" class="view">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-3xl font-bold text-white">Command Assignment</h2>
+              <p class="text-gray-400">
+                Atur perintah suara dan mata untuk profil
+                <span
+                  id="active-profile-name"
+                  class="font-semibold text-indigo-400"
+                ></span
+                >.
+              </p>
+            </div>
+            <button
+              onclick="openAddCommandModal()"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-lg flex items-center gap-2 transition-colors"
+            >
+              <i class="ph-bold ph-plus-circle"></i>
+              Add New Command
+            </button>
+          </div>
+          <div id="command-list" class="space-y-2">
+            <!-- Commands will be loaded here by JS -->
+          </div>
+        </div>
+
+        <!-- Devices View -->
+        <div id="devices-view" class="view hidden">
+          <h2 class="text-3xl font-bold text-white mb-6">Input Devices</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Microphone Card -->
+            <div class="bg-[#242629] border border-gray-700 rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <i class="ph-bold ph-microphone text-3xl text-sky-400"></i>
+                  <h3 class="text-xl font-bold text-white">Microphone</h3>
+                </div>
+                <span
+                  class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-full"
+                  >Connected</span
+                >
+              </div>
+              <p class="text-gray-400 mb-1">Device:</p>
+              <p class="text-white font-medium mb-4">
+                Realtek High Definition Audio (Default)
+              </p>
+              <p class="text-gray-400 mb-2">Input Level:</p>
+              <div class="w-full bg-gray-700 rounded-full h-2.5">
+                <div
+                  class="bg-sky-500 h-2.5 rounded-full"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <button
+                class="mt-6 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                onclick="alert('Fungsi belum diimplementasikan.')"
+              >
+                Device Settings
+              </button>
+            </div>
+            <!-- Eye Tracker Card -->
+            <div class="bg-[#242629] border border-gray-700 rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <i class="ph-bold ph-eye text-3xl text-violet-400"></i>
+                  <h3 class="text-xl font-bold text-white">Eye Tracker</h3>
+                </div>
+                <span
+                  class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-full"
+                  >Calibrated</span
+                >
+              </div>
+              <p class="text-gray-400 mb-1">Device:</p>
+              <p class="text-white font-medium mb-4">Tobii Eye Tracker 5</p>
+              <p class="text-gray-400 mb-2">Last Calibration:</p>
+              <p class="text-white font-medium">Today, 10:15 AM</p>
+              <button
+                class="mt-6 w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                onclick="alert('Fungsi belum diimplementasikan.')"
+              >
+                Device Settings
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calibration View -->
+        <div id="calibration-view" class="view hidden">
+          <h2 class="text-3xl font-bold text-white mb-6">Calibration Wizard</h2>
+          <p class="text-gray-400 mb-8 max-w-2xl">
+            Kalibrasi yang akurat adalah kunci untuk pengalaman bermain terbaik.
+            Ikuti langkah-langkah di bawah ini untuk mengoptimalkan perangkat
+            Anda.
+          </p>
+          <div class="space-y-8">
+            <!-- Microphone Calibration -->
+            <div
+              class="bg-[#242629] border border-gray-700 rounded-lg p-6 flex items-center gap-6"
+            >
+              <i class="ph-bold ph-microphone-stage text-5xl text-sky-400"></i>
+              <div>
+                <h3 class="text-xl font-bold text-white">
+                  Microphone Calibration
+                </h3>
+                <p class="text-gray-400 mt-1 mb-4">
+                  Pastikan suara Anda dikenali dengan jelas dan akurat oleh
+                  sistem.
+                </p>
+                <button
+                  class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-lg transition-colors"
+                  onclick="alert('Memulai proses kalibrasi mikrofon...')"
+                >
+                  Start Mic Calibration
+                </button>
+              </div>
+            </div>
+            <!-- Eye Tracker Calibration -->
+            <div
+              class="bg-[#242629] border border-gray-700 rounded-lg p-6 flex items-center gap-6"
+            >
+              <i class="ph-bold ph-dots-nine text-5xl text-violet-400"></i>
+              <div>
+                <h3 class="text-xl font-bold text-white">
+                  Eye Tracker Calibration
+                </h3>
+                <p class="text-gray-400 mt-1 mb-4">
+                  Ikuti titik-titik di layar untuk memastikan pelacakan mata
+                  yang presisi.
+                </p>
+                <button
+                  class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-5 rounded-lg transition-colors"
+                  onclick="alert('Memulai proses kalibrasi eye tracker...')"
+                >
+                  Start Eye Tracker Calibration
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settings-view" class="view hidden">
+          <h2 class="text-3xl font-bold text-white mb-8">Settings</h2>
+          <div class="max-w-3xl space-y-10">
+            <div>
+              <h3
+                class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4"
+              >
+                General
+              </h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <label for="language-select" class="text-gray-300"
+                    >Language</label
+                  >
+                  <select
+                    id="language-select"
+                    class="bg-gray-700 border border-gray-600 rounded-md px-3 py-1.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <option>Bahasa Indonesia</option>
+                    <option>English</option>
+                  </select>
+                </div>
+                <div class="flex justify-between items-center">
+                  <label for="theme-toggle" class="text-gray-300"
+                    >Start with Windows</label
+                  >
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      value=""
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3
+                class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4"
+              >
+                In-Game Overlay
+              </h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <label for="overlay-toggle" class="text-gray-300"
+                    >Enable In-Game Overlay</label
+                  >
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      value=""
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"
+                    ></div>
+                  </label>
+                </div>
+                <div class="flex justify-between items-center">
+                  <label for="feedback-toggle" class="text-gray-300"
+                    >Show Command Feedback</label
+                  >
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      value=""
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3
+                class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-4"
+              >
+                About
+              </h3>
+              <div class="text-gray-400">
+                <p>Aura Command v1.0.0 (Prototype)</p>
+                <p>Created to empower gamers everywhere.</p>
+                <button
+                  class="mt-4 text-indigo-400 hover:text-indigo-300 font-semibold"
+                  onclick="alert('Anda sudah menggunakan versi terbaru.')"
+                >
+                  Check for Updates
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Panel Aksi Bawah -->
+      <footer
+        id="action-panel"
+        class="action-panel bg-[#242629] p-4 border-t border-gray-700 relative"
+      >
+        <div class="flex items-center gap-4 mb-3">
+          <h3 class="text-sm font-semibold text-white">Action Library</h3>
+          <div class="flex gap-1">
+            <!-- Action tabs will be added here -->
+          </div>
+        </div>
+        <div id="action-keys-container" class="flex flex-wrap gap-2 text-white">
+          <!-- Action keys will be loaded here -->
+        </div>
+      </footer>
     </div>
 
+    <!-- Modal for Adding Command -->
+    <div
+      id="add-command-modal"
+      class="hidden fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+    >
+      <div
+        class="bg-[#2a2c30] rounded-lg shadow-xl w-full max-w-lg p-6 border border-gray-700"
+      >
+        <h3 class="text-xl font-bold text-white mb-4">Add New Command</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1"
+              >Trigger Input</label
+            >
+            <select
+              id="modal-trigger-type"
+              class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="voice">Voice Command</option>
+              <option value="eye">Eye Tracking</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1"
+              >Trigger Value (e.g., "Reload" or "Blink Right")</label
+            >
+            <input
+              type="text"
+              id="modal-trigger-value"
+              placeholder="Ucapkan 'Reload' atau 'Kedip Kanan'"
+              class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1"
+              >Action (Pilih dari library di bawah)</label
+            >
+            <input
+              type="text"
+              id="modal-action-value"
+              readonly
+              placeholder="Klik aksi dari Action Library"
+              class="w-full bg-gray-900 border border-gray-600 rounded-md px-3 py-2 text-white cursor-not-allowed"
+            />
+          </div>
+        </div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            onclick="closeAddCommandModal()"
+            class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Batal
+          </button>
+          <button
+            onclick="saveCommand()"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Simpan
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script>
-        // --- DATA ---
-        let profiles = {};
-        let activeProfileId = 'valorant';
-        let isModalOpen = false;
-        
-        const defaultProfiles = {
-            "valorant": {
-                name: "Valorant",
-                commands: [
-                    { id: 1, triggerType: 'voice', triggerValue: 'Reload', action: 'R' },
-                    { id: 2, triggerType: 'voice', triggerValue: 'Pakai Spike', action: '4' },
-                    { id: 3, triggerType: 'eye', triggerValue: 'Blink Right', action: 'Mouse Click Left' },
-                ]
+      // --- DATA STATE ---
+      let profiles = {};
+      let activeProfileId = "";
+      let isModalOpen = false;
+
+      const defaultProfiles = {
+        valorant: {
+          name: "Valorant",
+          commands: [
+            {
+              id: Date.now() + 1,
+              triggerType: "voice",
+              triggerValue: "Reload",
+              action: "R",
             },
-            "apex": {
-                name: "Apex Legends",
-                commands: [
-                    { id: 1, triggerType: 'voice', triggerValue: 'Pakai Shield Battery', action: '4' },
-                    { id: 2, triggerType: 'eye', triggerValue: 'Dwell on Enemy', action: 'Ping' },
-                ]
-            }
-        };
+            {
+              id: Date.now() + 2,
+              triggerType: "voice",
+              triggerValue: "Pakai Spike",
+              action: "4",
+            },
+            {
+              id: Date.now() + 3,
+              triggerType: "eye",
+              triggerValue: "Blink Right",
+              action: "Mouse Click Left",
+            },
+          ],
+        },
+        apex: {
+          name: "Apex Legends",
+          commands: [
+            {
+              id: Date.now() + 4,
+              triggerType: "voice",
+              triggerValue: "Pakai Shield Battery",
+              action: "4",
+            },
+            {
+              id: Date.now() + 5,
+              triggerType: "eye",
+              triggerValue: "Dwell on Enemy",
+              action: "Ping",
+            },
+          ],
+        },
+      };
 
-        const actionLibrary = {
-            "Keyboard": "ABCDEFGQRSTUVWXYZ1234567890".split('').concat(['Space', 'Shift', 'Ctrl', 'Alt', 'Tab', 'Enter']),
-            "Mouse": ["Mouse Click Left", "Mouse Click Right", "Mouse Click Middle", "Scroll Up", "Scroll Down"],
-            "Commands": ["Ping", "Open Map", "Push to Talk"]
-        };
+      const actionLibrary = {
+        Keyboard: "ABCDEFGQRSTUVWXYZ1234567890"
+          .split("")
+          .concat(["Space", "Shift", "Ctrl", "Alt", "Tab", "Enter"]),
+        Mouse: [
+          "Mouse Click Left",
+          "Mouse Click Right",
+          "Mouse Click Middle",
+          "Scroll Up",
+          "Scroll Down",
+        ],
+        Commands: ["Ping", "Open Map", "Push to Talk"],
+      };
 
-        // --- DATA PERSISTENCE ---
-        function saveData() {
-            localStorage.setItem('auraCommandProfiles', JSON.stringify(profiles));
+      // --- DATA PERSISTENCE (localStorage) ---
+      function saveData() {
+        try {
+          localStorage.setItem("auraCommandProfiles", JSON.stringify(profiles));
+        } catch (e) {
+          console.error("Failed to save data to localStorage", e);
         }
+      }
 
-        function loadData() {
-            const savedData = localStorage.getItem('auraCommandProfiles');
-            if (savedData) {
-                profiles = JSON.parse(savedData);
-                // Make sure there is at least one profile
-                if(Object.keys(profiles).length === 0) {
-                   profiles = defaultProfiles;
-                   activeProfileId = 'valorant';
-                   saveData();
-                } else {
-                    activeProfileId = Object.keys(profiles)[0];
-                }
-            } else {
-                profiles = defaultProfiles;
-                activeProfileId = 'valorant';
-                saveData();
-            }
+      function loadData() {
+        try {
+          const savedData = localStorage.getItem("auraCommandProfiles");
+          if (savedData && Object.keys(JSON.parse(savedData)).length > 0) {
+            profiles = JSON.parse(savedData);
+          } else {
+            profiles = JSON.parse(JSON.stringify(defaultProfiles)); // Deep copy
+            saveData();
+          }
+          activeProfileId = Object.keys(profiles)[0] || "";
+        } catch (e) {
+          console.error(
+            "Failed to load data from localStorage, resetting to default.",
+            e
+          );
+          profiles = JSON.parse(JSON.stringify(defaultProfiles)); // Deep copy
+          activeProfileId = Object.keys(profiles)[0] || "";
+          saveData();
         }
+      }
 
-        // --- RENDER FUNCTIONS ---
-        function renderProfiles() {
-            const container = document.getElementById('profiles-container');
-            container.innerHTML = `
+      // --- RENDER FUNCTIONS (Update UI) ---
+      function renderAll() {
+        renderProfiles();
+        renderCommands();
+        renderActionLibrary();
+      }
+
+      function renderProfiles() {
+        const container = document.getElementById("profiles-container");
+        if (!container) return;
+
+        container.innerHTML = `
                 <div class="flex justify-between items-center mb-2">
                     <h2 class="text-xs uppercase font-bold text-gray-400">Profiles</h2>
-                    <button class="text-gray-400 hover:text-white" onclick="addProfile()">+</button>
+                    <button class="text-gray-400 hover:text-white text-lg font-bold" onclick="addProfile()">+</button>
                 </div>
                 <div class="flex flex-col gap-1">
-                    ${Object.keys(profiles).map(id => `
-                        <a href="#" class="profile-item flex items-center gap-3 p-2 rounded-lg ${id === activeProfileId ? 'bg-indigo-600 text-white' : 'hover:bg-gray-700'}" onclick="switchProfile('${id}')">
+                    ${Object.keys(profiles)
+                      .map(
+                        (id) => `
+                        <a href="#" class="profile-item flex items-center gap-3 p-2 rounded-lg ${
+                          id === activeProfileId
+                            ? "bg-indigo-600 text-white"
+                            : "hover:bg-gray-700"
+                        }" onclick="switchProfile('${id}')">
                             <i class="ph-bold ph-game-controller"></i>
                             <span>${profiles[id].name}</span>
                         </a>
-                    `).join('')}
+                    `
+                      )
+                      .join("")}
                 </div>`;
+      }
+
+      function renderCommands() {
+        const list = document.getElementById("command-list");
+        if (!activeProfileId || !profiles[activeProfileId]) {
+          list.innerHTML = `<div class="text-center py-10 text-gray-500"><p>Pilih atau buat profil untuk memulai.</p></div>`;
+          document.getElementById("active-profile-name").textContent = "...";
+          return;
         }
 
-        function renderCommands() {
-            const list = document.getElementById('command-list');
-            const activeProfile = profiles[activeProfileId];
-            document.getElementById('active-profile-name').textContent = activeProfile.name;
-            
-            if (activeProfile.commands.length === 0) {
-                 list.innerHTML = `<div class="text-center py-10 text-gray-500">
+        const activeProfile = profiles[activeProfileId];
+        document.getElementById("active-profile-name").textContent =
+          activeProfile.name;
+
+        if (activeProfile.commands.length === 0) {
+          list.innerHTML = `<div class="text-center py-10 text-gray-500">
                     <p>Belum ada perintah untuk profil ini.</p>
                     <p>Klik 'Add New Command' untuk memulai.</p>
                  </div>`;
-                 return;
-            }
+          return;
+        }
 
-            list.innerHTML = activeProfile.commands.map(cmd => `
+        list.innerHTML = activeProfile.commands
+          .map(
+            (cmd) => `
                 <div class="flex items-center justify-between bg-[#2a2c30] p-3 rounded-lg border border-gray-700">
                     <div class="flex items-center gap-4">
-                        ${cmd.triggerType === 'voice' ? '<i class="ph-bold ph-microphone text-xl text-sky-400"></i>' : '<i class="ph-bold ph-eye text-xl text-violet-400"></i>'}
-                        <span class="font-semibold text-white">${cmd.triggerValue}</span>
+                        ${
+                          cmd.triggerType === "voice"
+                            ? '<i class="ph-bold ph-microphone text-xl text-sky-400"></i>'
+                            : '<i class="ph-bold ph-eye text-xl text-violet-400"></i>'
+                        }
+                        <span class="font-semibold text-white">${
+                          cmd.triggerValue
+                        }</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="action-key !bg-indigo-600 text-white !border-indigo-800">${cmd.action}</span>
-                        <button onclick="deleteCommand(${cmd.id})" class="text-gray-400 hover:text-red-500 p-1 rounded-full"><i class="ph-bold ph-trash"></i></button>
+                        <span class="action-key !bg-indigo-600 text-white !border-indigo-800">${
+                          cmd.action
+                        }</span>
+                        <button onclick="deleteCommand(${
+                          cmd.id
+                        })" class="text-gray-400 hover:text-red-500 p-1 rounded-full"><i class="ph-bold ph-trash"></i></button>
                     </div>
                 </div>
-            `).join('');
-        }
+            `
+          )
+          .join("");
+      }
 
-        function renderActionLibrary(category = "Keyboard") {
-            const container = document.getElementById('action-keys-container');
-            const tabsContainer = document.querySelector('#action-panel .flex.gap-1');
-            
-            tabsContainer.innerHTML = Object.keys(actionLibrary).map(cat => 
-                `<button class="px-3 py-1 text-xs rounded-md ${cat === category ? 'bg-indigo-600 text-white' : 'bg-gray-600 hover:bg-gray-500'}" onclick="renderActionLibrary('${cat}')">${cat}</button>`
-            ).join('');
+      function renderActionLibrary(category = "Keyboard") {
+        const container = document.getElementById("action-keys-container");
+        const tabsContainer = document.querySelector(
+          "#action-panel .flex.gap-1"
+        );
 
-            container.innerHTML = actionLibrary[category].map(key => 
-                `<button class="action-key" onclick="selectAction('${key}')">${key}</button>`
-            ).join('');
-        }
+        tabsContainer.innerHTML = Object.keys(actionLibrary)
+          .map(
+            (cat) =>
+              `<button class="px-3 py-1 text-xs rounded-md ${
+                cat === category
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-600 hover:bg-gray-500"
+              }" onclick="renderActionLibrary('${cat}')">${cat}</button>`
+          )
+          .join("");
 
-        // --- LOGIC FUNCTIONS ---
-        function addProfile() {
-            const profileName = prompt("Masukkan nama profil baru:", "New Game Profile");
-            if (profileName) {
-                const profileId = profileName.toLowerCase().replace(/\s+/g, '-');
-                if (!profiles[profileId]) {
-                    profiles[profileId] = { name: profileName, commands: [] };
-                    activeProfileId = profileId;
-                    saveData();
-                    renderProfiles();
-                    renderCommands();
-                } else {
-                    alert("Profil dengan nama tersebut sudah ada.");
-                }
-            }
-        }
+        container.innerHTML = actionLibrary[category]
+          .map(
+            (key) =>
+              `<button class="action-key" onclick="selectAction('${key}')">${key}</button>`
+          )
+          .join("");
+      }
 
-        function switchProfile(profileId) {
+      // --- LOGIC FUNCTIONS (Handle User Actions) ---
+      function addProfile() {
+        const profileName = prompt(
+          "Masukkan nama profil baru:",
+          "New Game Profile"
+        );
+        if (profileName && profileName.trim()) {
+          const profileId = profileName
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+          if (!profiles[profileId]) {
+            profiles[profileId] = { name: profileName.trim(), commands: [] };
             activeProfileId = profileId;
+            saveData();
             renderProfiles();
             renderCommands();
+          } else {
+            alert("Profil dengan nama tersebut sudah ada.");
+          }
         }
+      }
 
-        function switchView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            document.getElementById(`${viewId}-view`).classList.remove('hidden');
+      function switchProfile(profileId) {
+        activeProfileId = profileId;
+        renderProfiles();
+        renderCommands();
+      }
 
-            document.querySelectorAll('.nav-item').forEach(item => {
-                if(item.dataset.view === viewId) {
-                    item.classList.add('bg-gray-700', 'text-white');
-                } else {
-                    item.classList.remove('bg-gray-700', 'text-white');
-                }
-            });
+      function switchView(viewId) {
+        document
+          .querySelectorAll(".view")
+          .forEach((v) => v.classList.add("hidden"));
+        document.getElementById(`${viewId}-view`).classList.remove("hidden");
 
-            const actionPanel = document.getElementById('action-panel');
-            if (viewId === 'assignment') {
-                actionPanel.style.display = 'block';
-            } else {
-                actionPanel.style.display = 'none';
-            }
-        }
-
-        function openAddCommandModal() {
-            document.getElementById('add-command-modal').classList.remove('hidden');
-            document.getElementById('modal-trigger-value').value = '';
-            document.getElementById('modal-action-value').value = '';
-            isModalOpen = true;
-        }
-
-        function closeAddCommandModal() {
-            document.getElementById('add-command-modal').classList.add('hidden');
-            isModalOpen = false;
-        }
-
-        function selectAction(action) {
-            if (isModalOpen) {
-                document.getElementById('modal-action-value').value = action;
-            } else {
-                alert("Silakan buka modal 'Add New Command' terlebih dahulu untuk memilih aksi.");
-            }
-        }
-
-        function saveCommand() {
-            const triggerType = document.getElementById('modal-trigger-type').value;
-            const triggerValue = document.getElementById('modal-trigger-value').value;
-            const action = document.getElementById('modal-action-value').value;
-
-            if (!triggerValue || !action) {
-                alert("Harap isi semua kolom.");
-                return;
-            }
-
-            const newId = Date.now(); // simple unique ID
-            profiles[activeProfileId].commands.push({ id: newId, triggerType, triggerValue, action });
-            
-            saveData();
-            renderCommands();
-            closeAddCommandModal();
-        }
-        
-        function deleteCommand(commandId) {
-            const commands = profiles[activeProfileId].commands;
-            const index = commands.findIndex(cmd => cmd.id === commandId);
-            if (index > -1) {
-                commands.splice(index, 1);
-            }
-            saveData();
-            renderCommands();
-        }
-        
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            loadData();
-            renderProfiles();
-            renderCommands();
-            renderActionLibrary();
-
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    switchView(item.dataset.view);
-                });
-            });
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          if (item.dataset.view === viewId) {
+            item.classList.add("bg-gray-700", "text-white");
+          } else {
+            item.classList.remove("bg-gray-700", "text-white");
+          }
         });
-    </script>
-</body>
-</html>
 
+        const actionPanel = document.getElementById("action-panel");
+        actionPanel.style.display = viewId === "assignment" ? "block" : "none";
+      }
+
+      function openAddCommandModal() {
+        const actionPanel = document.getElementById("action-panel");
+        actionPanel.classList.add("z-[60]");
+
+        document.getElementById("add-command-modal").classList.remove("hidden");
+        document.getElementById("modal-trigger-value").value = "";
+        document.getElementById("modal-action-value").value = "";
+        isModalOpen = true;
+      }
+
+      function closeAddCommandModal() {
+        const actionPanel = document.getElementById("action-panel");
+        actionPanel.classList.remove("z-[60]");
+
+        document.getElementById("add-command-modal").classList.add("hidden");
+        isModalOpen = false;
+      }
+
+      function selectAction(action) {
+        if (isModalOpen) {
+          document.getElementById("modal-action-value").value = action;
+        } else {
+          alert(
+            "Silakan buka modal 'Add New Command' terlebih dahulu untuk memilih aksi."
+          );
+        }
+      }
+
+      function saveCommand() {
+        const triggerType = document.getElementById("modal-trigger-type").value;
+        const triggerValue = document
+          .getElementById("modal-trigger-value")
+          .value.trim();
+        const action = document.getElementById("modal-action-value").value;
+
+        if (!triggerValue || !action) {
+          alert(
+            "Harap isi Nama Perintah dan pilih sebuah Aksi dari Action Library."
+          );
+          return;
+        }
+
+        if (!activeProfileId || !profiles[activeProfileId]) {
+          alert(
+            "Tidak ada profil aktif. Silakan pilih atau buat profil terlebih dahulu."
+          );
+          return;
+        }
+
+        const newId = Date.now();
+        profiles[activeProfileId].commands.push({
+          id: newId,
+          triggerType,
+          triggerValue,
+          action,
+        });
+
+        saveData();
+        renderCommands();
+        closeAddCommandModal();
+      }
+
+      function deleteCommand(commandId) {
+        if (!activeProfileId || !profiles[activeProfileId]) return;
+
+        const commands = profiles[activeProfileId].commands;
+        const index = commands.findIndex((cmd) => cmd.id === commandId);
+        if (index > -1) {
+          commands.splice(index, 1);
+          saveData();
+          renderCommands();
+        }
+      }
+
+      // --- INITIALIZATION ---
+      document.addEventListener("DOMContentLoaded", () => {
+        loadData();
+        renderAll();
+
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchView(item.dataset.view);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
